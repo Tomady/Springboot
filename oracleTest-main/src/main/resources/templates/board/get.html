@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wrapper">
+    <div th:insert="fragments/header :: header"></div>
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Board Read</h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Board Read Page</div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label>BoardId</label>
+                            <input class="form-control" name="bbs_id" th:value="${board.bbs_id}" readonly="readonly">
+                        </div>
+                        <div class="form-group">
+                            <label>Title</label>
+                            <input class="form-control" name="title" th:value="${board.title}" readonly="readonly">
+                        </div>
+                        <div class="form-group">
+                            <label>Content</label>
+                            <input class="form-control" name="bcontent" th:value="${board.bcontent}" readonly="readonly">
+                        </div>
+                        <div class="form-group">
+                            <label>Nickname</label>
+                            <input class="form-control" name="nickname" th:value="${board.nickname}" readonly="readonly">
+                        </div>
+                        <button data-oper="modify" class="btn btn-default">Modify</button>
+                        <button data-oper="list" class="btn btn-info">List</button>
+
+                        <form id="operForm" action="/board/modify" method="get">
+                            <input type="hidden" id="bbs_id" name="bbs_id" th:value="${board.bbs_id}">
+                        </form>
+                    </div>
+                    <!-- end panel-body -->
+                </div>
+                <!-- end panel-body -->
+            </div>
+            <!-- end panel -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- page-wrapper -->
+</div>
+<!-- wrapper -->
+<div th:insert="fragments/footer :: footer"></div>
+</body>
+<script type="text/javascript">
+    $(document).ready(function() {
+        let operForm = $("#operForm");
+
+        $("button[data-oper='modify']").on("click", function(e) {
+            operForm.attr("action", "/board/modify").submit();
+        });
+
+        $("button[data-oper='list']").on("click", function(e) {
+            operForm.find("#bbs_id").remove();
+            operForm.attr("action", "/board/list");
+            operForm.submit();
+        });
+    });
+</script>
+</html>
