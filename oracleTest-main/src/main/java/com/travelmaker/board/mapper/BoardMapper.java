@@ -50,4 +50,8 @@ public interface BoardMapper {
             "udate = CURRENT_DATE " +
             "where bbs_id = #{bbs_id}")
     public int update(BoardVO board);
+
+    @Select("select count(*) from bbs " +
+            "where bbs_id > 0")
+    public int getTotalCount(Criteria cri);
 }

@@ -22,6 +22,8 @@
                     <!-- /.panel-heading -->
                     <div class="panel-body">
                         <form role="form" action="/board/modify" method="post">
+                            <input type="hidden" name="pageNum" th:value="${cri.pageNum}">
+                            <input type="hidden" name="amount" th:value="${cri.amount}">
                             <div class="form-group">
                                 <label>BoardId</label>
                                 <input class="form-control" name="bbs_id" th:value="${board.bbs_id}" readonly="readonly">
@@ -96,7 +98,13 @@
             } else if(operation === "list") {
                 // move to list
                 formObj.attr("action", "/board/list").attr("method", "get");
+
+                let pageNumTag = $("input[name='pageNum']").clone();
+                let amountTag = $("input[name='amount']").clone();
+
                 formObj.empty();
+                formObj.append(pageNum);
+                formObj.append(amountTag);
             }
 
             formObj.submit();

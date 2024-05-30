@@ -42,6 +42,8 @@
 
                         <form id="operForm" action="/board/modify" method="get">
                             <input type="hidden" id="bbs_id" name="bbs_id" th:value="${board.bbs_id}">
+                            <input type="hidden" name="pageNum" th:value="${cri.pageNum}">
+                            <input type="hidden" name="amount" th:value="${cri.amount}">
                         </form>
                     </div>
                     <!-- end panel-body -->

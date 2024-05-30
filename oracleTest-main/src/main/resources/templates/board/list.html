@@ -39,12 +39,32 @@
 
                             <tr th:each="board : ${list}">
                                 <td th:text="${board.bbs_id}">Id</td>
-                                <td><a th:href="|/board/get?bbs_id=${board.bbs_id}|" th:text="${board.title}">Title</a></td>
+                                <td><a class="move" th:href="${board.bbs_id}" th:text="${board.title}">Title</a></td>
                                 <td th:text="${board.nickname}">Nickname</td>
                                 <td th:text="${#dates.format(board.cdate, 'yyyy-MM-dd')}">cDate</td>
                                 <td th:text="${#dates.format(board.udate, 'yyyy-MM-dd')}">uDate</td>
                             </tr>
                         </table>
+
+                        <div class="pull-right">
+                            <ul class="pagination">
+                                <li class="paginate_button previous" th:if="${pageMaker.prev}">
+                                    <a th:href="${pageMaker.startPage -1}">Previous</a>
+                                </li>
+                                <li th:attr="class=${pageMaker.cri.pageNum == num} ? 'paginate_button active' : 'paginate_button'" th:each="num : ${#numbers.sequence(pageMaker.startPage, pageMaker.endPage)}">
+                                    <a th:href="${num}" th:text="${num}"></a>
+                                </li>
+                                <li class="paginate_button next" th:if="${pageMaker.next}">
+                                    <a th:href="${pageMaker.endPage + 1}">Next</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <form id="actionForm" action="/board/list" method="get">
+                            <input type="hidden" name="pageNum" th:value="${pageMaker.cri.pageNum}">
+                            <input type="hidden" name="amount" th:value="${pageMaker.cri.amount}">
+                        </form>
+
                         <!-- Modal -->
                         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
@@ -101,6 +121,22 @@
 
         $("#regBtn").on("click", function() {
             self.location = "/board/register";
+        });
+
+        let actionForm = $("#actionForm");
+
+        $(".paginate_button a").on("click", function(e) {
+            e.preventDefault();
+            console.log("click");
+            actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+            actionForm.submit();
+        });
+
+        $(".move").on("click", function(e) {
+            e.preventDefault();
+            actionForm.append("<input type='hidden' name='bbs_id' value='" + $(this).attr("href") + "'>");
+            actionForm.attr("action", "/board/get");
+            actionForm.submit();
         });
     });
 </script>
