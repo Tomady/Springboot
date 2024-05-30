@@ -9,13 +9,13 @@ import java.util.List;
 @Mapper
 public interface BoardMapper {
 
-    @Select("select * " +
-            "from(" +
-                "select /*+ index_desc(bbs bbs_pk)*/ rownum rn, bbs_id, management_id, title, code_id, nickname, bcontent, status, hit, good, bad, plan_id, cdate, udate " +
-                "from bbs " +
-                "where rownum <= #{pageNum} * #{amount} " +
-            ") " +
-            "where rn > (#{pageNum} - 1) * #{amount}")
+//    @Select("select * " +
+//            "from(" +
+//                "select /*+ index_desc(bbs bbs_pk)*/ rownum rn, bbs_id, management_id, title, code_id, nickname, bcontent, status, hit, good, bad, plan_id, cdate, udate " +
+//                "from bbs " +
+//                "where rownum <= #{pageNum} * #{amount} " +
+//            ") " +
+//            "where rn > (#{pageNum} - 1) * #{amount}")
     public List<BoardVO> getListWithPaging(Criteria cri);
 
     @Select("select * from bbs " +
@@ -51,7 +51,5 @@ public interface BoardMapper {
             "where bbs_id = #{bbs_id}")
     public int update(BoardVO board);
 
-    @Select("select count(*) from bbs " +
-            "where bbs_id > 0")
     public int getTotalCount(Criteria cri);
 }
