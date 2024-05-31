@@ -1,5 +1,6 @@
 package com.travelmaker.reply.mapper;
 
+import com.travelmaker.board.domain.Criteria;
 import com.travelmaker.reply.domain.ReplyVO;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -7,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
 import java.util.stream.IntStream;
 
 @SpringBootTest
@@ -44,7 +46,7 @@ public class ReplyMapperTests {
 
     @Test
     public void testDelete() {
-        int targetRno = 1;
+        Long targetRno = 1L;
 
         mapper.delete(targetRno);
     }
@@ -59,5 +61,14 @@ public class ReplyMapperTests {
         int count = mapper.update(vo);
 
         log.info("UPDATE COUNT: " + count);
+    }
+
+    @Test
+    public void testList() {
+        Criteria cri = new Criteria();
+
+        List<ReplyVO> replies = mapper.getListWithPaging(cri, bnoArr[0]);
+
+        replies.forEach(reply -> log.info(String.valueOf(reply)));
     }
 }
