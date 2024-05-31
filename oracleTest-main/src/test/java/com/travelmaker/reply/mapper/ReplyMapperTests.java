@@ -15,7 +15,7 @@ public class ReplyMapperTests {
     @Setter(onMethod_ = @Autowired)
     private ReplyMapper mapper;
 
-    private Long[] bbs_id_Arr = {1028L, 1027L, 1026L, 1025L, 1024L};
+    private Long[] bnoArr = {3595L, 3594L, 3593L, 3592L, 3591L};
 
     @Test
     public void testMapper() {
@@ -27,10 +27,9 @@ public class ReplyMapperTests {
         IntStream.rangeClosed(1, 10).forEach(i -> {
             ReplyVO vo = new ReplyVO();
 
-            vo.setBbs_id(bbs_id_Arr[i % 5]);
-            vo.setManagement_id(1L);
-            vo.setBcontent("댓글 테스트 " + i);
-            vo.setNickname("replyer " + i);
+            vo.setBno(bnoArr[i % 5]);
+            vo.setReply("댓글 테스트 " + i);
+            vo.setReplyer("replyer " + i);
 
             mapper.insert(vo);
         });
@@ -38,8 +37,27 @@ public class ReplyMapperTests {
 
     @Test
     public void testRead() {
-        Long targetRbbs_id = 22L;
-        ReplyVO vo = mapper.read(targetRbbs_id);
+        Long targetRno = 5L;
+        ReplyVO vo = mapper.read(targetRno);
         log.info(String.valueOf(vo));
+    }
+
+    @Test
+    public void testDelete() {
+        int targetRno = 1;
+
+        mapper.delete(targetRno);
+    }
+
+    @Test
+    public void testUpdate() {
+        Long targetRno = 10L;
+        ReplyVO vo = mapper.read(targetRno);
+
+        vo.setReply("Update Reply ");
+
+        int count = mapper.update(vo);
+
+        log.info("UPDATE COUNT: " + count);
     }
 }
