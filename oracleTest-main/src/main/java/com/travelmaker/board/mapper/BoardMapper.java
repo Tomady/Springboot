@@ -11,44 +11,40 @@ public interface BoardMapper {
 
 //    @Select("select * " +
 //            "from(" +
-//                "select /*+ index_desc(bbs bbs_pk)*/ rownum rn, bbs_id, management_id, title, code_id, nickname, bcontent, status, hit, good, bad, plan_id, cdate, udate " +
-//                "from bbs " +
+//                "select /*+ index_desc(tbl_board pk_board)*/ rownum rn, bno, title, writer, content, regdate, updatedate " +
+//                "from tbl_board " +
 //                "where rownum <= #{pageNum} * #{amount} " +
 //            ") " +
 //            "where rn > (#{pageNum} - 1) * #{amount}")
     public List<BoardVO> getListWithPaging(Criteria cri);
 
-    @Select("select * from bbs " +
-            "where bbs_id > 0")
+    @Select("select * from tbl_board " +
+            "where bno > 0")
     public List<BoardVO> getList();
 
-    @Insert("insert into bbs(bbs_id, management_id, title, code_id, nickname, bcontent, status) " +
-            "values(bbs_bbs_id_seq.nextval, #{management_id}, #{title}, #{code_id}, #{nickname}, #{bcontent}, #{status})")
+    @Insert("insert into tbl_board(bno, title, writer, content) " +
+            "values(seq_board.nextval, #{title}, #{writer}, #{content})")
     public void insert(BoardVO board);
 
-    @SelectKey(statement = "select bbs_bbs_id_seq.nextval from dual", keyProperty = "bbs_id", before = true, resultType = int.class)
-    @Insert("insert into bbs(bbs_id, management_id, title, code_id, nickname, bcontent, status) " +
-            "values(#{bbs_id}, #{management_id}, #{title}, #{code_id}, #{nickname}, #{bcontent}, #{status})")
+    @SelectKey(statement = "select seq_board.nextval from dual", keyProperty = "bno", before = true, resultType = int.class)
+    @Insert("insert into tbl_board(bno, title, writer, content) " +
+            "values(#{bno}, #{title}, #{writer}, #{content})")
     public void insertSelectKey(BoardVO board);
 
-    @Select("select * from bbs " +
-            "where bbs_id = #{bbs_id}")
-    public BoardVO read(int bbs_id);
+    @Select("select * from tbl_board " +
+            "where bno = #{bno}")
+    public BoardVO read(int bno);
 
-    @Delete("delete from bbs " +
-            "where bbs_id = #{bbs_id}")
-    public int delete(int bbs_id);
+    @Delete("delete from tbl_board " +
+            "where bno = #{bno}")
+    public int delete(int bno);
 
-    @Update("update bbs " +
-            "set management_id = #{management_id}, " +
-            "title = #{title}, " +
-            "code_id = #{code_id}, " +
-            "nickname = #{nickname}, " +
-            "bcontent = #{bcontent}, " +
-            "status = #{status}, " +
-            "plan_id = #{plan_id, jdbcType=INTEGER}, " +
-            "udate = CURRENT_DATE " +
-            "where bbs_id = #{bbs_id}")
+    @Update("update tbl_board " +
+            "set title = #{title}, " +
+            "writer = #{writer}, " +
+            "content = #{content}, " +
+            "updatedate = sysdate " +
+            "where bno = #{bno}")
     public int update(BoardVO board);
 
     public int getTotalCount(Criteria cri);

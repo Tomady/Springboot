@@ -22,9 +22,9 @@ public class JDBCTests {
     public void testConnection() {
         try(Connection con =
                 DriverManager.getConnection(
-                        "jdbc:oracle:thin:@travelmaker_high?TNS_ADMIN=E:/yellowKim/Wallet_travelmaker",
-                        "ADMIN",
-                        "Travelmaker1"
+                        "jdbc:oracle:thin:@localhost:1521:XE",
+                        "book_ex",
+                        "book_ex"
                 )
         ) {
             log.info(String.valueOf(con));

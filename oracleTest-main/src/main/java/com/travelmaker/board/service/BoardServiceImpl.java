@@ -23,10 +23,10 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public BoardVO get(int bbs_id) {
-        log.info("get......." + bbs_id);
+    public BoardVO get(int bno) {
+        log.info("get......." + bno);
 
-        return mapper.read(bbs_id);
+        return mapper.read(bno);
     }
 
     @Override
@@ -37,10 +37,10 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public boolean remove(int bbs_id) {
-        log.info("remove......." + bbs_id);
+    public boolean remove(int bno) {
+        log.info("remove......." + bno);
 
-        return mapper.delete(bbs_id) == 1;
+        return mapper.delete(bno) == 1;
     }
 
 //    @Override

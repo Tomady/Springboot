@@ -23,7 +23,7 @@
                     <div class="panel-body">
                         <div class="form-group">
                             <label>BoardId</label>
-                            <input class="form-control" name="bbs_id" th:value="${board.bbs_id}" readonly="readonly">
+                            <input class="form-control" name="bno" th:value="${board.bno}" readonly="readonly">
                         </div>
                         <div class="form-group">
                             <label>Title</label>
@@ -31,17 +31,17 @@
                         </div>
                         <div class="form-group">
                             <label>Content</label>
-                            <input class="form-control" name="bcontent" th:value="${board.bcontent}" readonly="readonly">
+                            <input class="form-control" name="content" th:value="${board.content}" readonly="readonly">
                         </div>
                         <div class="form-group">
-                            <label>Nickname</label>
-                            <input class="form-control" name="nickname" th:value="${board.nickname}" readonly="readonly">
+                            <label>Writer</label>
+                            <input class="form-control" name="writer" th:value="${board.writer}" readonly="readonly">
                         </div>
                         <button data-oper="modify" class="btn btn-default">Modify</button>
                         <button data-oper="list" class="btn btn-info">List</button>
 
                         <form id="operForm" action="/board/modify" method="get">
-                            <input type="hidden" id="bbs_id" name="bbs_id" th:value="${board.bbs_id}">
+                            <input type="hidden" id="bno" name="bno" th:value="${board.bno}">
                             <input type="hidden" name="pageNum" th:value="${cri.pageNum}">
                             <input type="hidden" name="amount" th:value="${cri.amount}">
                             <input type="hidden" name="keyword" th:value="${cri.keyword}">
@@ -70,7 +70,7 @@
         });
 
         $("button[data-oper='list']").on("click", function(e) {
-            operForm.find("#bbs_id").remove();
+            operForm.find("#bno").remove();
             operForm.attr("action", "/board/list");
             operForm.submit();
         });

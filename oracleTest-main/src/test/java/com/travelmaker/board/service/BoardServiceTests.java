@@ -27,18 +27,13 @@ public class BoardServiceTests {
     public void testRegister() {
         BoardVO board = new BoardVO();
 
-        board.setManagement_id(333);
         board.setTitle("테스트 글");
-        board.setCode_id("test_code_id");
-        board.setNickname("test_nickname");
-        board.setBcontent("test_bcontent");
-        board.setStatus('N');
-        board.setHit(333);
-        board.setPlan_id(333);
+        board.setWriter("test_writer");
+        board.setContent("test_content");
 
         service.register(board);
 
-        log.info("생성된 게시물의 번호: " + board.getBbs_id());
+        log.info("생성된 게시물의 번호: " + board.getBno());
     }
 
     @Test

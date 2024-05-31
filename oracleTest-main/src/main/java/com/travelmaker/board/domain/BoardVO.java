@@ -4,23 +4,16 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 @Setter
 @Getter
 @ToString
 public class BoardVO {
-    private int bbs_id;
-    private int management_id;
+    private int bno;
     private String title;
-    private String code_id;
-    private String nickname;
-    private String bcontent;
-    private char status;
-    private int hit;
-    private int good;
-    private int bad;
-    private Integer plan_id;
-    private Timestamp cdate;
-    private Timestamp udate;
+    private String content;
+    private String writer;
+    private Date regdate;
+    private Date updatedate;
 }

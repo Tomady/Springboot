@@ -38,11 +38,11 @@
                             </thead>
 
                             <tr th:each="board : ${list}">
-                                <td th:text="${board.bbs_id}">Id</td>
-                                <td><a class="move" th:href="${board.bbs_id}" th:text="${board.title}">Title</a></td>
-                                <td th:text="${board.nickname}">Nickname</td>
-                                <td th:text="${#dates.format(board.cdate, 'yyyy-MM-dd')}">cDate</td>
-                                <td th:text="${#dates.format(board.udate, 'yyyy-MM-dd')}">uDate</td>
+                                <td th:text="${board.bno}">Id</td>
+                                <td><a class="move" th:href="${board.bno}" th:text="${board.title}">Title</a></td>
+                                <td th:text="${board.writer}">Writer</td>
+                                <td th:text="${#dates.format(board.regdate, 'yyyy-MM-dd')}">regDate</td>
+                                <td th:text="${#dates.format(board.updatedate, 'yyyy-MM-dd')}">updateDate</td>
                             </tr>
                         </table>
 
@@ -156,7 +156,7 @@
 
         $(".move").on("click", function(e) {
             e.preventDefault();
-            actionForm.append("<input type='hidden' name='bbs_id' value='" + $(this).attr("href") + "'>");
+            actionForm.append("<input type='hidden' name='bno' value='" + $(this).attr("href") + "'>");
             actionForm.attr("action", "/board/get");
             actionForm.submit();
         });

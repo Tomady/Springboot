@@ -50,15 +50,15 @@ public class BoardController {
         log.info("/register: " + board);
 
         service.register(board);
-        rttr.addFlashAttribute("result", board.getBbs_id());
+        rttr.addFlashAttribute("result", board.getBno());
 
         return "redirect:/board/list";
     }
 
     @GetMapping({"/get", "/modify"})
-    public void get(@RequestParam("bbs_id") int bbs_id, @ModelAttribute("cri") Criteria cri, Model model) {
+    public void get(@RequestParam("bno") int bno, @ModelAttribute("cri") Criteria cri, Model model) {
         log.info("/get or /modify");
-        model.addAttribute("board", service.get(bbs_id));
+        model.addAttribute("board", service.get(bno));
     }
 
     @PostMapping("/modify")
@@ -79,10 +79,10 @@ public class BoardController {
     }
 
     @PostMapping("/remove")
-    public String remove(@RequestParam("bbs_id") int bbs_id, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
-        log.info("/remove" + bbs_id);
+    public String remove(@RequestParam("bno") int bno, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
+        log.info("/remove" + bno);
 
-        if(service.remove(bbs_id)) {
+        if(service.remove(bno)) {
             rttr.addFlashAttribute("result", "success");
         }
 

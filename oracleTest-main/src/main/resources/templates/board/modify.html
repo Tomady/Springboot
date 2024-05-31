@@ -28,43 +28,27 @@
                             <input type="hidden" name="keyword" th:value="${cri.keyword}">
                             <div class="form-group">
                                 <label>BoardId</label>
-                                <input class="form-control" name="bbs_id" th:value="${board.bbs_id}" readonly="readonly">
-                            </div>
-                            <div class="form-group" style="display: none;">
-                                <label>ManagementId</label>
-                                <input class="form-control" name="management_id" value="1">
+                                <input class="form-control" name="bno" th:value="${board.bno}" readonly="readonly">
                             </div>
                             <div class="form-group">
                                 <label>Title</label>
                                 <input class="form-control" name="title" th:value="${board.title}">
                             </div>
-                            <div class="form-group" style="display: none;">
-                                <label>CodeId</label>
-                                <input class="form-control" name="code_id" value="F3333">
-                            </div>
                             <div class="form-group">
                                 <label>Content</label>
-                                <textarea class="form-control" rows="3" name="bcontent" th:value="|${board.bcontent}|" th:text="|${board.bcontent}|"></textarea>
+                                <textarea class="form-control" rows="3" name="content" th:value="|${board.content}|" th:text="|${board.content}|"></textarea>
                             </div>
                             <div class="form-group">
-                                <label>Nickname</label>
-                                <input class="form-control" name="nickname" th:value="${board.nickname}" readonly="readonly">
-                            </div>
-                            <div class="form-group" style="display: none;">
-                                <label>Status</label>
-                                <input class="form-control" name="status" value="F">
-                            </div>
-                            <div class="form-group" style="display: none;">
-                                <label>PlanId</label>
-                                <input class="form-control" name="plan_id">
+                                <label>writer</label>
+                                <input class="form-control" name="writer" th:value="${board.writer}" readonly="readonly">
                             </div>
                             <div class="form-group" style="display: none;">
                                 <label>RegDate</label>
-                                <input class="form-control" name="cDate" th:value="|${#dates.format(board.cdate, 'yyyy-MM-dd')}|">
+                                <input class="form-control" name="regDate" th:value="|${#dates.format(board.regdate, 'yyyy-MM-dd')}|">
                             </div>
                             <div class="form-group" style="display: none;">
                                 <label>UpdateDate</label>
-                                <input class="form-control" name="uDate" th:value="|${#dates.format(board.udate, 'yyyy-MM-dd')}|">
+                                <input class="form-control" name="updateDate" th:value="|${#dates.format(board.updatedate, 'yyyy-MM-dd')}|">
                             </div>
                             <button type="submit" data-oper="modify" class="btn btn-default">Modify</button>
                             <button type="submit" data-oper="remove" class="btn btn-danger">Remove</button>
@@ -107,7 +91,7 @@
                 let typeTag = $("input[name='type']").clone();
 
                 formObj.empty();
-                formObj.append(pageNum);
+                formObj.append(pageNumTag);
                 formObj.append(amountTag);
                 formObj.append(keywordTag);
                 formObj.append(typeTag);

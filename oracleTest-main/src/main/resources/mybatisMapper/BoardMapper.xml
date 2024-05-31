@@ -12,10 +12,10 @@
                             title like '%'||#{keyword}||'%'
                         </when>
                         <when test="type == 'C'.toString()">
-                            bcontent like '%'||#{keyword}||'%'
+                            content like '%'||#{keyword}||'%'
                         </when>
                         <when test="type == 'W'.toString()">
-                            nickname like '%'||#{keyword}||'%'
+                            writer like '%'||#{keyword}||'%'
                         </when>
                     </choose>
                 </trim>
@@ -27,8 +27,8 @@
         <![CDATA[
         select *
         from
-            (select /*+ index_desc(bbs bbs_pk)*/ rownum rn, bbs_id, management_id, title, code_id, nickname, bcontent, status, hit, good, bad, plan_id, cdate, udate
-            from bbs
+            (select /*+ index_desc(tbl_board pk_board)*/ rownum rn, bno, title, writer, content, regdate, updatedate
+            from tbl_board
             where
         ]]>
 
@@ -42,11 +42,10 @@
     </select>
 
     <select id="getTotalCount" resultType="int">
-        select count(*) from bbs
+        select count(*) from tbl_board
         where
         <include refid="criteria"></include>
 
-        bbs_id > 0
+        bno > 0
     </select>
-
 </mapper>

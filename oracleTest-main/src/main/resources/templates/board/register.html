@@ -22,29 +22,17 @@
                     <!-- /.panel-heading -->
                     <div class="panel-body">
                         <form role="form" action="/board/register" method="post">
-                            <div class="form-group" style="display: none;">
-                                <label>ManagementId</label>
-                                <input class="form-control" name="management_id" value="1">
-                            </div>
                             <div class="form-group">
                                 <label>Title</label>
                                 <input class="form-control" name="title">
                             </div>
-                            <div class="form-group" style="display: none;">
-                                <label>CodeId</label>
-                                <input class="form-control" name="code_id" value="F3333">
+                            <div class="form-group">
+                                <label>Content</label>
+                                <textarea class="form-control" rows="3" name="content"></textarea>
                             </div>
                             <div class="form-group">
-                                <label>bContent</label>
-                                <textarea class="form-control" rows="3" name="bcontent"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label>Nickname</label>
-                                <input class="form-control" name="nickname">
-                            </div>
-                            <div class="form-group" style="display: none;">
-                                <label>Status</label>
-                                <input class="form-control" name="status" value="F">
+                                <label>Writer</label>
+                                <input class="form-control" name="writer">
                             </div>
                             <button type="submit" class="btn btn-default">Submit Button</button>
                             <button type="reset" class="btn btn-default">Reset Button</button>

@@ -26,14 +26,9 @@ public class BoardMapperTests {
     public void testInsert() {
         BoardVO board = new BoardVO();
 
-        board.setManagement_id(333);
         board.setTitle("테스트 글");
-        board.setCode_id("test_code_id");
-        board.setNickname("test_nickname");
-        board.setBcontent("test_bcontent");
-        board.setStatus('N');
-        board.setHit(333);
-        board.setPlan_id(333);
+        board.setWriter("test_writer");
+        board.setContent("test_content");
 
         mapper.insert(board);
 
@@ -59,10 +54,8 @@ public class BoardMapperTests {
         BoardVO board = mapper.read(4);
 
         board.setTitle("타이틀 수정");
-        board.setCode_id("F3333");
-        board.setNickname("닉네임 수정");
-        board.setBcontent("내용 수정");
-        board.setStatus('T');
+        board.setWriter("작성자 수정");
+        board.setContent("내용 수정");
 
         int result = mapper.update(board);
 
@@ -83,7 +76,7 @@ public class BoardMapperTests {
     @Test
     public void testSearch() {
         Criteria cri = new Criteria();
-        cri.setKeyword("노랭");
+        cri.setKeyword("테스트");
         cri.setType("TC");
 
         List<BoardVO> list = mapper.getListWithPaging(cri);

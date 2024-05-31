@@ -43,12 +43,9 @@ public class BoardControllerTests {
     public void testRegister() throws Exception {
         String resultPage = mockMvc.perform(
             MockMvcRequestBuilders.post("/board/register")
-            .param("management_id", "1")
             .param("title", "/board/register 테스트")
-            .param("code_id", "F3333")
-            .param("nickname", "yellow_dan")
-            .param("bcontent", "springboot thymeleaf test")
-            .param("status", "F")
+            .param("writer", "yellow_dan")
+            .param("content", "springboot thymeleaf test")
         ).andReturn().getModelAndView().getViewName();
 
         log.info(resultPage);
@@ -61,7 +58,7 @@ public class BoardControllerTests {
                 mockMvc.perform(
                     MockMvcRequestBuilders
                     .get("/board/get")
-                    .param("bbs_id", "1")
+                    .param("bno", "1")
                 )
                 .andReturn()
                 .getModelAndView()
@@ -75,14 +72,10 @@ public class BoardControllerTests {
         String resultPage = mockMvc
             .perform(
                 MockMvcRequestBuilders.post("/board/modify")
-                .param("bbs_id", "23")
-                .param("management_id", "1")
+                .param("bno", "23")
                 .param("title", "title 수정")
-                .param("code_id", "F3333")
-                .param("nickname", "yellowDan")
-                .param("bcontent", "나는 바보다")
-                .param("status", "F")
-                .param("plan_id", (String) null)
+                .param("writer", "yellowDan")
+                .param("content", "나는 바보다")
             ).andReturn().getModelAndView().getViewName();
 
         log.info(resultPage);
@@ -92,7 +85,7 @@ public class BoardControllerTests {
     public void testRemove() throws Exception {
         String resultPage = mockMvc.perform(
             MockMvcRequestBuilders.post("/board/remove")
-            .param("bbs_id", "23")
+            .param("bno", "23")
         ).andReturn().getModelAndView().getViewName();
 
         log.info(resultPage);
