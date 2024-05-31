@@ -18,11 +18,17 @@ public interface ReplyMapper {
 
     @Delete("delete from tbl_reply " +
             "where rno = #{rno}")
-    public int delete(int rno);
+    public int delete(Long rno);
 
     @Update("update tbl_reply " +
             "set reply = #{reply}, " +
             "updatedate = sysdate " +
             "where rno = #{rno}")
     public int update(ReplyVO reply);
+
+    @Select("select rno, bno, reply, replyer, replyDate, updateDate " +
+            "from tbl_reply " +
+            "where bno = #{bno} " +
+            "order by rno asc")
+    public List<ReplyVO> getListWithPaging(@Param("cri") Criteria cri, @Param("bno") Long bno);
 }
