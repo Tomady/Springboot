@@ -18,28 +18,28 @@ public class ReplyServiceImpl implements ReplyService {
 
     @Override
     public int register(ReplyVO vo) {
-        log.info("register......." + vo);
+        log.info("reply Register......." + vo);
 
         return mapper.insert(vo);
     }
 
     @Override
     public ReplyVO get(Long rno) {
-        log.info("get......." + rno);
+        log.info("reply Get......." + rno);
 
         return mapper.read(rno);
     }
 
     @Override
     public int modify(ReplyVO vo) {
-        log.info("modify......." + vo);
+        log.info("reply Modify......." + vo);
 
         return mapper.update(vo);
     }
 
     @Override
     public int remove(Long rno) {
-        log.info("remove......." + rno);
+        log.info("reply Remove......." + rno);
 
         return mapper.delete(rno);
     }

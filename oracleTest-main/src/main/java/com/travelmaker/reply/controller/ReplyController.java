@@ -21,7 +21,7 @@ public class ReplyController {
 
     @PostMapping(value = "/new", consumes = "application/json", produces = {MediaType.TEXT_PLAIN_VALUE})
     public ResponseEntity<String> create(@RequestBody ReplyVO vo) {
-        log.info("/new.......");
+        log.info("reply: /new.......");
         log.info("ReplyVO: " + vo);
 
         int insertCount = service.register(vo);
@@ -33,28 +33,39 @@ public class ReplyController {
             new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @GetMapping(value = "/pages/{bno}/{page}", produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<List<ReplyVO>> getList(@PathVariable("page") int page, @PathVariable("bno") Long bno) {
-        log.info("/pages/bno/page: " + "bno: " + bno + "page: " + page);
+//    @GetMapping(value = "/pages/{bno}/{page}", produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
+    @GetMapping(value = "/pages/{bno}/{page}", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<List<ReplyVO>> getList(@PathVariable("page") String page, @PathVariable("bno") Long bno) {
+        log.info("reply: /pages/bno/page: " + "bno: " + bno + ", page: " + page);
         log.info("getList.......");
 
-        Criteria cri = new Criteria(page, 10);
+        // 문자열 .json으로 요청이 들어왔을 경우.
+        if(page.indexOf('.') >= 0) {
+            page = page.split("\\.")[0];
+        }
+
+        Criteria cri = new Criteria(Integer.parseInt(page), 10);
 
         log.info(String.valueOf(cri));
 
         return new ResponseEntity<>(service.getList(cri, bno), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/{rno}", produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<ReplyVO> get(@PathVariable("rno") Long rno) {
-        log.info("get: " + rno);
+//    @GetMapping(value = "/{rno}", produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
+    @GetMapping(value = "/{rno}")
+    public ResponseEntity<ReplyVO> get(@PathVariable("rno") String rno) {
+        log.info("reply get: " + rno);
 
-        return new ResponseEntity<>(service.get(rno), HttpStatus.OK);
+        if(rno.indexOf('.') >= 0) {
+            rno = rno.split("\\.")[0];
+        }
+
+        return new ResponseEntity<>(service.get(Long.parseLong(rno)), HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{rno}", produces = {MediaType.TEXT_PLAIN_VALUE})
     public ResponseEntity<String> remove(@PathVariable("rno") Long rno) {
-        log.info("remove: " + rno);
+        log.info("reply remove: " + rno);
 
         return service.remove(rno) == 1 ?
             new ResponseEntity<>("success", HttpStatus.OK) :
@@ -66,7 +77,7 @@ public class ReplyController {
         consumes = "application/json",
         produces = {MediaType.TEXT_PLAIN_VALUE})
     public ResponseEntity<String> modify(@RequestBody ReplyVO vo, @PathVariable("rno") Long rno) {
-        log.info("modify: " + vo);
+        log.info("reply modify: " + vo);
         log.info("rno: " + rno);
         vo.setRno(rno);
 
