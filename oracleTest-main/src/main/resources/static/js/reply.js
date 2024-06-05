@@ -38,7 +38,7 @@ let replyService = (function() {
         if(res.ok) {
             let result = await res.json();
             console.log("json ", result);
-            callback(result);
+            callback(result.replyCnt, result.list);
         } else {
             error("status code not ok");
         }

@@ -1,6 +1,7 @@
 package com.travelmaker.reply.controller;
 
 import com.travelmaker.board.domain.Criteria;
+import com.travelmaker.reply.domain.ReplyPageDTO;
 import com.travelmaker.reply.domain.ReplyVO;
 import com.travelmaker.reply.service.ReplyService;
 import lombok.AllArgsConstructor;
@@ -35,7 +36,7 @@ public class ReplyController {
 
 //    @GetMapping(value = "/pages/{bno}/{page}", produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
     @GetMapping(value = "/pages/{bno}/{page}", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<List<ReplyVO>> getList(@PathVariable("page") String page, @PathVariable("bno") Long bno) {
+    public ResponseEntity<ReplyPageDTO> getList(@PathVariable("page") String page, @PathVariable("bno") Long bno) {
         log.info("reply: /pages/bno/page: " + "bno: " + bno + ", page: " + page);
         log.info("getList.......");
 
@@ -46,9 +47,10 @@ public class ReplyController {
 
         Criteria cri = new Criteria(Integer.parseInt(page), 10);
 
+        log.info("get Reply List bno: " + bno);
         log.info(String.valueOf(cri));
 
-        return new ResponseEntity<>(service.getList(cri, bno), HttpStatus.OK);
+        return new ResponseEntity<>(service.getListPage(cri, bno), HttpStatus.OK);
     }
 
 //    @GetMapping(value = "/{rno}", produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})

@@ -1,6 +1,7 @@
 package com.travelmaker.reply.service;
 
 import com.travelmaker.board.domain.Criteria;
+import com.travelmaker.reply.domain.ReplyPageDTO;
 import com.travelmaker.reply.domain.ReplyVO;
 import com.travelmaker.reply.mapper.ReplyMapper;
 import lombok.Setter;
@@ -49,5 +50,10 @@ public class ReplyServiceImpl implements ReplyService {
         log.info("get Reply List of a Board " + bno);
 
         return mapper.getListWithPaging(cri, bno);
+    }
+
+    @Override
+    public ReplyPageDTO getListPage(Criteria cri, Long bno) {
+        return new ReplyPageDTO(mapper.getCountByBno(bno), mapper.getListWithPaging(cri, bno));
     }
 }
