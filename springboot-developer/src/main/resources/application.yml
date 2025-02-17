@@ -9,6 +9,7 @@ spring:
 
   datasource:
     url: jdbc:h2:mem:testdb
+    data: classpath:/data.sql
 
   h2:
     console:
