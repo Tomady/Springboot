@@ -4,13 +4,11 @@ spring:
     properties:
       hibernate:
         format_sql: true
-
     defer-datasource-initialization: true
-
   datasource:
     url: jdbc:h2:mem:testdb
-    data: classpath:/data.sql
-
+    username: sa
+    #data: classpath:/data.sql
   h2:
     console:
       enabled: true
